@@ -12,7 +12,7 @@ public class Patient {
         this.scanner = scanner;
     }
 
-    // Add a new patient to the database
+    
     public void addPatient() {
         String name;
         do {
@@ -24,24 +24,24 @@ public class Patient {
             }
         } while (name.isEmpty());
 
-        // Validate age input
+        
         int age = -1;
         while (true) {
             System.out.print("Enter Patient Age: ");
             if (scanner.hasNextInt()) {
                 age = scanner.nextInt();
-                if (age > 0 && age < 120) { // Validate age range
+                if (age > 0 && age < 120) { 
                     break;
                 } else {
                     System.out.println("Please enter a valid age between 1 and 120.");
                 }
             } else {
                 System.out.println("Invalid input! Please enter a valid number for age.");
-                scanner.next(); // Clear invalid input
+                scanner.next(); 
             }
         }
 
-        // Validate gender input
+        
         String gender = "";
         while (true) {
             System.out.print("Enter Patient Gender (Male/Female/Other): ");
@@ -55,7 +55,7 @@ public class Patient {
             }
         }
 
-        // Insert patient into database
+        
         String query = "INSERT INTO patients(name, age, gender) VALUES(?, ?, ?)";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setString(1, name);
@@ -72,7 +72,7 @@ public class Patient {
         }
     }
 
-    // View all patients in the database
+    
     public void viewPatients() {
         String query = "SELECT * FROM patients";
         try (PreparedStatement stmt = connection.prepareStatement(query);
@@ -96,7 +96,7 @@ public class Patient {
         }
     }
 
-    // Check if a patient exists by ID
+    
     public boolean getPatientById(int id) {
         String query = "SELECT * FROM patients WHERE id = ?";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
